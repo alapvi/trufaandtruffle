@@ -1,91 +1,84 @@
-// Lógica de idioma, menú móvil y formulario de contacto
 (function () {
   const STORAGE_KEY = 'tt-lang';
+  const header = document.getElementById('site-header');
+  const navToggle = document.getElementById('nav-toggle');
+  const mainNav = document.getElementById('main-nav');
 
-  function getValue(obj, path) {
-    return path.split('.').reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : null), obj);
+  function getValue(object, path) {
+    return path.split('.').reduce((value, key) => (value && value[key] !== undefined ? value[key] : null), object);
   }
 
   function applyLanguage(lang) {
-    const dict = translations[lang] || translations.es;
-
+    const dictionary = translations[lang] || translations.en;
     document.documentElement.lang = lang;
-
-    document.querySelectorAll('[data-i18n]').forEach((el) => {
-      const value = getValue(dict, el.getAttribute('data-i18n'));
-      if (value) el.textContent = value;
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      const value = getValue(dictionary, element.dataset.i18n);
+      if (value) element.textContent = value;
     });
-
-    document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
-      el.getAttribute('data-i18n-attr').split(',').forEach((rule) => {
-        const [attr, path] = rule.split(':');
-        const value = getValue(dict, path);
-        if (value) el.setAttribute(attr, value);
-      });
-    });
-
-    document.querySelectorAll('.lang-btn').forEach((btn) => {
-      btn.classList.toggle('active', btn.dataset.lang === lang);
-    });
-
+    document.querySelectorAll('[data-i18n-attr]').forEach((element) => element.dataset.i18nAttr.split(',').forEach((rule) => {
+      const [attribute, path] = rule.split(':');
+      const value = getValue(dictionary, path);
+      if (value) element.setAttribute(attribute, value);
+    }));
+    document.querySelectorAll('.lang-btn').forEach((button) => button.classList.toggle('active', button.dataset.lang === lang));
     localStorage.setItem(STORAGE_KEY, lang);
   }
 
-  // Selector de idioma
-  document.querySelectorAll('.lang-btn').forEach((btn) => {
-    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
-  });
+  function closeNavigation() {
+    if (!mainNav || !navToggle) return;
+    mainNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
 
-  const savedLang = localStorage.getItem(STORAGE_KEY);
-  const browserLang = navigator.language && navigator.language.startsWith('en') ? 'en' : 'es';
-  applyLanguage(savedLang || browserLang);
+  function closeMenus() {
+    document.querySelectorAll('.nav-menu[open]').forEach((menu) => menu.removeAttribute('open'));
+  }
 
-  // Menú móvil
-  const navToggle = document.getElementById('nav-toggle');
-  const mainNav = document.getElementById('main-nav');
+  document.querySelectorAll('.lang-btn').forEach((button) => button.addEventListener('click', () => applyLanguage(button.dataset.lang)));
+  const savedLanguage = localStorage.getItem(STORAGE_KEY);
+  const browserLanguage = navigator.language && navigator.language.startsWith('fr') ? 'fr' : navigator.language && navigator.language.startsWith('en') ? 'en' : 'es';
+  applyLanguage(savedLanguage || browserLanguage);
+
   if (navToggle && mainNav) {
     navToggle.addEventListener('click', () => {
-      const isOpen = mainNav.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', String(isOpen));
+      const open = mainNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
     });
-    mainNav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mainNav.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
+    mainNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      closeMenus();
+      closeNavigation();
+    }));
+    mainNav.querySelectorAll('summary').forEach((summary) => summary.addEventListener('click', () => {
+      mainNav.querySelectorAll('details').forEach((item) => {
+        if (item !== summary.parentElement) item.removeAttribute('open');
       });
-    });
+    }));
   }
 
-  // Botones "Consultar" de productos: llevan al formulario y preseleccionan el producto
-  document.querySelectorAll('.product-inquiry').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const productSelect = document.getElementById('product');
-      if (productSelect) productSelect.value = btn.dataset.product;
-      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
-    });
+  document.addEventListener('click', (event) => {
+    if (mainNav && !mainNav.contains(event.target)) closeMenus();
   });
 
-  // Formulario de contacto: sin backend, se envía como mailto
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeNavigation();
+      closeMenus();
+    }
+  });
+  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 24), { passive: true });
+
+  const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+    document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach((link) => link.classList.toggle('is-active', entry.isIntersecting));
+  }), { rootMargin: '-35% 0px -55% 0px' });
+  document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
+
   const form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const phone = form.phone.value.trim();
-      const product = form.product.value;
-      const message = form.message.value.trim();
-
-      const subject = encodeURIComponent(`Consulta de trufa - ${name}`);
-      const body = encodeURIComponent(
-        `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nProducto de interés: ${product}\n\nMensaje:\n${message}`
-      );
-
-      window.location.href = `mailto:info@truffaandtruffle.com?subject=${subject}&body=${body}`;
-    });
-  }
-
-  // Año actual en el footer
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  if (form) form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const subject = encodeURIComponent(`Truffle enquiry - ${data.get('company') || data.get('name')}`);
+    const body = encodeURIComponent(`Name: ${data.get('name')}\nCompany: ${data.get('company')}\nCountry: ${data.get('country')}\nEmail: ${data.get('email')}\nPhone: ${data.get('phone')}\n\nMessage:\n${data.get('message')}`);
+    window.location.href = `mailto:info@truffaandtruffle.com?subject=${subject}&body=${body}`;
+  });
+  document.getElementById('year').textContent = new Date().getFullYear();
 })();
