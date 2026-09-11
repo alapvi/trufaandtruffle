@@ -72,13 +72,57 @@
   }), { rootMargin: '-35% 0px -55% 0px' });
   document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
 
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('.carousel-track');
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dots = carousel.querySelectorAll('[data-carousel-dot]');
+    let currentIndex = 0;
+    let timer;
+
+    function showSlide(index) {
+      currentIndex = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === currentIndex));
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === currentIndex;
+        dot.classList.toggle('is-active', isActive);
+        dot.setAttribute('aria-selected', String(isActive));
+      });
+    }
+
+    function startAutoPlay() {
+      clearInterval(timer);
+      timer = setInterval(() => showSlide(currentIndex + 1), 5000);
+    }
+
+    carousel.querySelector('[data-carousel-prev]').addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+      startAutoPlay();
+    });
+    carousel.querySelector('[data-carousel-next]').addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+      startAutoPlay();
+    });
+    dots.forEach((dot) => dot.addEventListener('click', () => {
+      showSlide(Number(dot.dataset.carouselDot));
+      startAutoPlay();
+    }));
+    carousel.addEventListener('mouseenter', () => clearInterval(timer));
+    carousel.addEventListener('mouseleave', startAutoPlay);
+    carousel.addEventListener('focusin', () => clearInterval(timer));
+    carousel.addEventListener('focusout', (event) => {
+      if (!carousel.contains(event.relatedTarget)) startAutoPlay();
+    });
+    startAutoPlay();
+  });
+
   const form = document.getElementById('contact-form');
   if (form) form.addEventListener('submit', (event) => {
     event.preventDefault();
     const data = new FormData(form);
     const subject = encodeURIComponent(`Truffle enquiry - ${data.get('company') || data.get('name')}`);
     const body = encodeURIComponent(`Name: ${data.get('name')}\nCompany: ${data.get('company')}\nCountry: ${data.get('country')}\nEmail: ${data.get('email')}\nPhone: ${data.get('phone')}\n\nMessage:\n${data.get('message')}`);
-    window.location.href = `mailto:info@truffaandtruffle.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@trufaandtruffle.com?subject=${subject}&body=${body}`;
   });
   document.getElementById('year').textContent = new Date().getFullYear();
 })();

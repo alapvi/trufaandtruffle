@@ -1,6 +1,6 @@
 const translations = {
   en: {
-    meta: { title: 'Truffa & Truffle | Premium Black Truffle', description: 'Premium fresh Tuber melanosporum grown in Spain for professional customers.' },
+    meta: { title: 'Trufa & Truffle | Premium Black Truffle', description: 'Premium fresh Tuber melanosporum grown in Spain for professional customers.' },
     nav: { home: 'HOME', truffles: 'TRUFFLES', freshTruffle: 'Fresh Black Truffle', harvest: 'Harvest & Season', grades: 'Grades & Formats', fields: 'OUR FIELDS', quality: 'QUALITY', selection: 'Individual Selection', preparation: 'Preparation Process', professionals: 'FOR PROFESSIONALS', tailored: 'Tailored to Each Customer', logistics: 'Logistics & Cold Chain', importers: 'Importers & Distributors', about: 'ABOUT', contact: 'CONTACT' },
     hero: { eyebrow: 'FRESH BLACK TRUFFLE', title: 'Tuber melanosporum', subtitle: 'Grown in Spain. From our own truffle fields.', season: 'Mid-November — Late March', cta: 'DISCOVER' },
     fields: { eyebrow: 'OUR FIELDS', title: 'WE ARE GROWERS.', text: 'Our Tuber melanosporum is grown in our own truffle fields in Spain. Being growers allows us to follow our truffles from the land through selection and preparation for our customers.', highlight: 'OUR LAND. OUR COMMITMENT.' },
@@ -15,7 +15,7 @@ const translations = {
     about: { eyebrow: 'ABOUT', title: 'TRADITION & EXPERIENCE.', imageAlt: 'Truffle tradition and experience in Spain', text: 'For decades, our company has been dedicated to the world of truffles. Experience, product knowledge and close relationships with our customers define the way we work.', highlight: 'QUALITY AND SERVICE. ALWAYS.' },
     contact: { eyebrow: 'CONTACT', title: 'LET’S TALK TRUFFLES.', text: 'Tell us about your requirements and our team will respond with the right format for your business.', form: { name: 'Name', company: 'Company', country: 'Country', email: 'Email', phone: 'Phone', message: 'Message', submit: 'REQUEST INFORMATION', note: 'Your email client will open with the enquiry drafted.' } },
     footer: { country: 'SPAIN', rights: 'All rights reserved.' },
-    accessibility: { home: 'Truffa & Truffle home', languages: 'Language selector', menu: 'Open menu', primaryNav: 'Primary navigation' }
+    accessibility: { home: 'Trufa & Truffle home', languages: 'Language selector', menu: 'Open menu', primaryNav: 'Primary navigation' }
   }
 };
 translations.es = JSON.parse(JSON.stringify(translations.en));
@@ -48,12 +48,12 @@ Object.assign(translations.es.about, { eyebrow: 'NOSOTROS', title: 'TRADICIÓN Y
 Object.assign(translations.fr.about, { eyebrow: 'À PROPOS', title: 'TRADITION ET EXPÉRIENCE.', imageAlt: 'Tradition et expérience de la truffe en Espagne', text: 'Depuis des décennies, notre entreprise se consacre au monde de la truffe. L’expérience, la connaissance du produit et la proximité avec nos clients définissent notre façon de travailler.', highlight: 'QUALITÉ ET SERVICE. TOUJOURS.' });
 Object.assign(translations.es.contact, { eyebrow: 'CONTACTO', title: 'HABLEMOS DE TRUFAS.', text: 'Cuéntanos tus requisitos y nuestro equipo responderá con el formato adecuado para tu negocio.' });
 Object.assign(translations.fr.contact, { eyebrow: 'CONTACT', title: 'PARLONS TRUFFES.', text: 'Parlez-nous de vos besoins et notre équipe vous répondra avec le format adapté à votre activité.' });
-Object.assign(translations.es.meta, { title: 'Truffa & Truffle | Trufa Negra Premium', description: 'Tuber melanosporum fresca de calidad premium, cultivada en España para clientes profesionales.' });
-Object.assign(translations.fr.meta, { title: 'Truffa & Truffle | Truffe Noire Premium', description: 'Tuber melanosporum fraîche de qualité premium, cultivée en Espagne pour les clients professionnels.' });
+Object.assign(translations.es.meta, { title: 'Trufa & Truffle | Trufa Negra Premium', description: 'Tuber melanosporum fresca de calidad premium, cultivada en España para clientes profesionales.' });
+Object.assign(translations.fr.meta, { title: 'Trufa & Truffle | Truffe Noire Premium', description: 'Tuber melanosporum fraîche de qualité premium, cultivée en Espagne pour les clients professionnels.' });
 Object.assign(translations.es.footer, { country: 'ESPAÑA', rights: 'Todos los derechos reservados.' });
 Object.assign(translations.fr.footer, { country: 'ESPAGNE', rights: 'Tous droits réservés.' });
-Object.assign(translations.es.accessibility, { home: 'Inicio de Truffa & Truffle', languages: 'Selector de idioma', menu: 'Abrir menú', primaryNav: 'Navegación principal' });
-Object.assign(translations.fr.accessibility, { home: 'Accueil de Truffa & Truffle', languages: 'Sélecteur de langue', menu: 'Ouvrir le menu', primaryNav: 'Navigation principale' });
+Object.assign(translations.es.accessibility, { home: 'Inicio de Trufa & Truffle', languages: 'Selector de idioma', menu: 'Abrir menú', primaryNav: 'Navegación principal' });
+Object.assign(translations.fr.accessibility, { home: 'Accueil de Trufa & Truffle', languages: 'Sélecteur de langue', menu: 'Ouvrir le menu', primaryNav: 'Navigation principale' });
 Object.assign(translations.es.nav, { freshTruffle: 'Trufa negra fresca', harvest: 'Cosecha y temporada', grades: 'Categorías y formatos', selection: 'Selección individual', preparation: 'Proceso de preparación', tailored: 'Adaptado a cada cliente', logistics: 'Logística y cadena de frío', importers: 'Importadores y distribuidores' });
 Object.assign(translations.fr.nav, { freshTruffle: 'Truffe noire fraîche', harvest: 'Récolte et saison', grades: 'Catégories et formats', selection: 'Sélection individuelle', preparation: 'Processus de préparation', tailored: 'Adapté à chaque client', logistics: 'Logistique et chaîne du froid', importers: 'Importateurs et distributeurs' });
 Object.assign(translations.es.process, { eyebrow: 'CALIDAD', title: 'DE LA COSECHA A LA ENTREGA.', imageAlt: 'Trufas frescas durante el proceso de preparación', harvest: 'COSECHA', wash: 'LAVAR O CEPILLAR', selection: 'SELECCIÓN INDIVIDUAL', canifage: 'CANIFAGE', grading: 'CLASIFICACIÓN', packing: 'EMBALAJE', coldChain: 'CADENA DE FRÍO', delivery: 'ENTREGA' });

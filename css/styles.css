@@ -81,8 +81,24 @@ p { max-width: 65ch; margin: 0 0 1.2rem; }
 .about-copy { max-width: 620px; }
 .about-image { width: min(100%, 430px); margin: 0; justify-self: end; }
 .about-image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: rgba(255,255,255,.16); border-radius: 1rem; box-shadow: 0 1rem 2rem rgba(32,26,21,.12); }
+.field-carousel { width: 100%; min-width: 0; }
+.carousel-viewport { position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 1rem; background: rgba(255,255,255,.16); box-shadow: 0 1rem 2rem rgba(32,26,21,.12); }
+.carousel-track { display: flex; height: 100%; transition: transform 500ms cubic-bezier(.2,.75,.25,1); }
+.carousel-slide { flex: 0 0 100%; min-width: 0; height: 100%; margin: 0; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+.carousel-control { position: absolute; top: 50%; width: 2.7rem; height: 2.7rem; display: grid; place-items: center; padding: 0 0 .25rem; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; color: var(--white); background: rgba(32,26,21,.52); cursor: pointer; font-family: Georgia, serif; font-size: 2rem; line-height: 1; transform: translateY(-50%); transition: background var(--ease), border-color var(--ease); }
+.carousel-control:hover, .carousel-control:focus-visible { border-color: var(--white); background: rgba(32,26,21,.82); }
+.carousel-prev { left: 1rem; }
+.carousel-next { right: 1rem; }
+.carousel-dots { display: flex; justify-content: center; gap: .55rem; padding-top: 1rem; }
+.carousel-dot { width: .55rem; height: .55rem; padding: 0; border: 1px solid var(--gold); border-radius: 50%; background: transparent; cursor: pointer; transition: background var(--ease), transform var(--ease); }
+.carousel-dot:hover, .carousel-dot:focus-visible, .carousel-dot.is-active { background: var(--gold); }
+.carousel-dot.is-active { transform: scale(1.25); }
 .section-image { margin: 0; }
 .section-image img, .grades-image img, .quality-image img, .process-image img, .logistics-image img, .professionals-image img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: rgba(255,255,255,.16); border-radius: 1rem; box-shadow: 0 1rem 2rem rgba(32,26,21,.12); }
+.logistics-image .carousel-slide img { height: 100%; aspect-ratio: auto; object-fit: cover; background: transparent; border-radius: 0; box-shadow: none; }
+.professionals-image.field-carousel { aspect-ratio: auto; overflow: visible; }
+.professionals-image .carousel-slide img { height: 100%; aspect-ratio: auto; object-fit: cover; background: transparent; border-radius: 0; box-shadow: none; }
 .section-image img { object-fit: cover; }
 .dark-section { color: var(--white); background: var(--ink); }
 .dark-section h2 { color: var(--white); }
