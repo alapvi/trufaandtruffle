@@ -106,12 +106,16 @@ p { max-width: 65ch; margin: 0 0 1.2rem; }
 .product-image img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 1rem; filter: none; }
 .fact-row { display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin-top: 2.5rem; color: #e0bd7d; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
 .tailored-section, .professionals-section { background: #ece2d4; }
+.tailored-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(240px, .8fr); gap: clamp(1.5rem, 5vw, 3rem); align-items: center; }
+.tailored-copy { max-width: 520px; }
+.tailored-image { width: min(100%, 360px); margin: 0; justify-self: center; overflow: hidden; border-radius: 1.1rem; background: rgba(255,255,255,.12); box-shadow: 0 1rem 2rem rgba(32,26,21,.12); }
+.tailored-image img { display: block; width: 100%; height: 100%; aspect-ratio: 7 / 5; object-fit: cover; object-position: center; border-radius: 1.1rem; }
 .professionals-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr); gap: clamp(2rem, 8vw, 7rem); align-items: center; }
 .professionals-copy { max-width: 560px; }
 .professionals-image { width: min(100%, 430px); aspect-ratio: 4 / 3; margin: 0; justify-self: end; overflow: hidden; border-radius: 1rem; }
 .professionals-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; background: transparent; border-radius: 1rem; box-shadow: 0 1rem 2rem rgba(32,26,21,.12); }
-.check-list, .audience-list { display: grid; gap: .9rem; margin: 0; padding: 0; list-style: none; }
-.check-list li, .audience-list li { padding-bottom: .7rem; border-bottom: 1px solid var(--line); }
+.check-list, .audience-list { display: grid; gap: .7rem; margin: 0; padding: 0; list-style: none; }
+.check-list li, .audience-list li { padding-bottom: .55rem; border-bottom: 1px solid var(--line); font-size: .95rem; }
 .check-list li::before { margin-right: .7rem; color: var(--gold); content: '—'; }
 .grades-intro { display: grid; grid-template-columns: 1fr minmax(240px, .55fr); gap: 2rem; align-items: center; }
 .grades-image { margin: 0; justify-self: end; width: min(100%, 300px); }
