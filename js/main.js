@@ -36,7 +36,8 @@
 
   document.querySelectorAll('.lang-btn').forEach((button) => button.addEventListener('click', () => applyLanguage(button.dataset.lang)));
   const savedLanguage = localStorage.getItem(STORAGE_KEY);
-  const browserLanguage = navigator.language && navigator.language.startsWith('fr') ? 'fr' : navigator.language && navigator.language.startsWith('en') ? 'en' : 'es';
+  const browserLocale = (navigator.language || navigator.languages?.[0] || 'es').toLowerCase();
+  const browserLanguage = browserLocale.startsWith('it') ? 'it' : browserLocale.startsWith('fr') ? 'fr' : browserLocale.startsWith('en') ? 'en' : 'es';
   applyLanguage(savedLanguage || browserLanguage);
 
   if (navToggle && mainNav) {
