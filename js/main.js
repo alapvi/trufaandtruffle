@@ -122,7 +122,7 @@
     const data = new FormData(form);
     const subject = encodeURIComponent(`Truffle enquiry - ${data.get('company') || data.get('name')}`);
     const body = encodeURIComponent(`Name: ${data.get('name')}\nCompany: ${data.get('company')}\nCountry: ${data.get('country')}\nEmail: ${data.get('email')}\nPhone: ${data.get('phone')}\n\nMessage:\n${data.get('message')}`);
-    window.location.href = `mailto:info@trufaandtruffle.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:administration@trufaandtruffle.com?subject=${subject}&body=${body}`;
   });
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
